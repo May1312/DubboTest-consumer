@@ -11,8 +11,9 @@
    <dubbo:registry address="zookeeper://127.0.0.1:2181" ></dubbo:registry> 
    
      <!-- 要引用的服务 -->  
-   <dubbo:reference interface="com.helian.interf.IDemoService" id="demoService" check="false" ></dubbo:reference>
-  
+   <dubbo:reference interface="com.helian.interf.IDemoService" id="demoService" check="false" version="1.0.0"></dubbo:reference>
+   <dubbo:reference interface="com.helian.interf.IDemoService" id="demoService2" check="false"></dubbo:reference>
+   <dubbo:reference interface="com.helian.interf.IDemoService" id="demoService3" check="false" version="*"></dubbo:reference>
   <dubbo:reference interface="com.helian.interf.TwoDemo" id="twoDemo" check="false" ></dubbo:reference>
    
 </beans>

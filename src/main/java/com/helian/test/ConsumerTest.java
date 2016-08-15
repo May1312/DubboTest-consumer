@@ -1,15 +1,18 @@
 package com.helian.test;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.helian.beans.User;
 import com.helian.interf.IDemoService;
 import com.helian.interf.TwoDemo;
-import com.helian.service.DubboService;
 
 
 /**
@@ -27,7 +30,11 @@ public class ConsumerTest{
 	private TwoDemo twoDemo;
 	
 	@Autowired
-	private DubboService dubboService;
+	//@Reference(version="2.0.0") 标签无法使用？异常
+	private IDemoService demoService2;
+	
+	@Autowired
+	private IDemoService demoService3;
 	
 	@RequestMapping("/run")
 	public String run(HttpServletRequest request,Model model) { 
@@ -37,8 +44,12 @@ public class ConsumerTest{
 		//ApplicationContext context = new ClassPathXmlApplicationContext("spring/dubbo-applicationContext.xml");
 		//IDemoService bean = (IDemoService) context.getBean("demoService");
 		//System.out.println(bean.sayHello("lumanmanqixiuyuanxi"));
-		System.out.println(dubboService.run());
 		System.out.println(demoService.sayHello("lumanmanqixiuyuanxi"));
+		System.out.println(demoService2.sayHello("traveling time"));
+		for (int x=0;x<3;x++) {
+			System.out.println(demoService3.sayHello("测试version为 *的情况下"));
+		}
+		
 		List<Object> list = twoDemo.run();
 		/*User user = new User();
 		user.setName("雷布斯");
